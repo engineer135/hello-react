@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 class EventPractive extends Component {
     state = {
-        message : ''
+        message : '',
+        message2 : ''
     }
     constructor(props){
         super(props);
@@ -15,23 +16,26 @@ class EventPractive extends Component {
     handleChange = (e)=>{
         console.log(this); // bind한 경우 EventPractice bind 안하면? undefined! but 화살표 함수 형태로 만들면 바인딩 필요없음
         this.setState({
-            message: e.target.value
+            [e.target.name]: e.target.value
         });
     }
     handleClick = ()=>{
-        alert(this.state.message);
+        alert(`${this.state.message} : ${this.state.message2}`);
         this.setState({
-            message: ''
+            message: '',
+            message2: ''
         });
     }
     render(){
         return(
             <div>
                 <h1>이벤트연습ㅋ</h1>
-                <input type="text" name="message" placeholder="아무거나 입력해라"
+                <input type="text" name="message" placeholder="메세지1"
                 value={this.state.message}
                 onChange={this.handleChange}/>
-                미리보기:{this.state.message}<br/>
+                <input type="text" name="message2" placeholder="메세지2"
+                value={this.state.message2}
+                onChange={this.handleChange}/>
                 <button onClick={this.handleClick}>확인</button>
             </div>
         )
