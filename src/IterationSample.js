@@ -22,20 +22,20 @@ const IterationSample = () => {
         setNames(nextNames);
         setInputText('');
     };
-    const onClickRemove = () => {
-        // push로 기존 배열 변경이 아닌 concat으로 새로운 배열 만들어서 진행. 불변성 유지를 위해 항상 이런식으로 해야함.
-        const nextNames = names.slice(0, names.length-1);
-        console.log(nextNames);
-        setNextId(nextId-1);
-        setNames(nextNames);
+    const onRemove = (id) => {
+        //console.log(id);
+        const removedNames = names.filter((name)=>{
+            return name.id !== id;
+        });
+        setNames(removedNames);
     };
 
-    const nameList = names.map((name)=><li key={name.id} attr-key={name.id}>{name.text}</li>);
+    // onRemove 호출할때 이렇게 화살표 함수로 실행해야 실행이 된다. 그냥 onRemove는 안되넹.
+    const nameList = names.map((name)=><li key={name.id} attr-key={name.id} onDoubleClick={()=>onRemove(name.id)}>{name.text}</li>);
     return (
         <>
             <input value={inputText} onChange={onChange}/>
             <button onClick={onClick}>추가</button>
-            <button onClick={onClickRemove}>삭제</button>
             <ul>{nameList}</ul>
         </>
     )
