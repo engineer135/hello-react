@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { render } from 'react-dom';
 import './App.css';
-import MyComponent from './Info'
+import MyComponent from './CounterWithReducer'
 
 const App = () => {
   const [visible, setVisible] = useState(false);
